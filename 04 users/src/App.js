@@ -7,6 +7,7 @@ import { Users } from './components/Users';
 
 function App() {
   const [users, setUsers] = React.useState([]);
+  const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch('https://reqres.in/api/users')
@@ -17,12 +18,13 @@ function App() {
       .catch((err) => {
         console.warn(err);
         alert('11111');
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <div className="App">
-      <Users items={users} />
+      <Users items={users} isLoading={isLoading} />
       {/* <Success /> */}
     </div>
   );
