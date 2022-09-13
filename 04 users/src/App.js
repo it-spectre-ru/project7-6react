@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <Users />
+      <Users items={users} />
       {/* <Success /> */}
     </div>
   );
