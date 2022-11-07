@@ -1,21 +1,22 @@
 import React from 'react';
+import { Collection } from './Collection';
 import './index.scss';
 
-function Collection({ name, images }) {
-  return (
-    <div className="collection">
-      <img className="collection__big" src={images[0]} alt="Item" />
-      <div className="collection__bottom">
-        <img className="collection__mini" src={images[1]} alt="Item" />
-        <img className="collection__mini" src={images[2]} alt="Item" />
-        <img className="collection__mini" src={images[3]} alt="Item" />
-      </div>
-      <h4>{name}</h4>
-    </div>
-  );
-}
-
 function App() {
+  const [collections, setCollections] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('https://5c3755177820ff0014d92711.mockapi.io/photo_collections')
+      .then((res) => res.json())
+      .then((json) => {
+        setCollections(json);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Error');
+      });
+  }, []);
+
   return (
     <div className="App">
       <h1>Моя коллекция фотографий</h1>
